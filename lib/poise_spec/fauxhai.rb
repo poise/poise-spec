@@ -28,7 +28,7 @@ module PoiseSpec
 
       klass.param(:version) do
         # In case it gets set to nil or '' somehow.
-        return unless platform || platform.empty?
+        return '' if !platform || platform.empty?
         # Find the path to the platform JSON files.
         json_path = File.expand_path("lib/fauxhai/platforms/#{platform}/*.json", ::Fauxhai.root)
         # Get a list of all versions.

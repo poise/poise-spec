@@ -42,4 +42,13 @@ describe PoiseSpec::Fauxhai do
       it { is_expected.to eq ['windows', '2012R2'] }
     end
   end # /context with a platform (version autodetect)
+
+  context 'with no platform' do
+    it { is_expected.to eq ['chefspec', '0.6.1'] }
+  end # /context with no platform
+
+  context 'with an empty platform' do
+    platform ''
+    it { is_expected.to eq ['', ''] }
+  end # /context with an empty platform
 end
