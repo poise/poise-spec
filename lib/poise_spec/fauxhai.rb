@@ -34,7 +34,12 @@ module PoiseSpec
         # Get a list of all versions.
         versions = Dir[json_path].map {|path| File.basename(path, '.json') }
         # Take the highest version available. Treat R like a separator.
-        versions.max_by {|ver| Gem::Version.create(ver.gsub(/r/i, '.')) }
+        begin
+          versions.max_by {|ver| Gem::Version.create(ver.gsub(/r/i, '.')) }
+        rescue ArgumentError
+          # Welp, do something stable.
+          versions.max
+        end
       end
 
     end
