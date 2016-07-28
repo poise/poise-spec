@@ -16,6 +16,7 @@
 
 require 'chef/mash' # Needed for chef/node/attribute.
 require 'chef/node/attribute'
+require 'rspec/core/shared_context'
 
 require 'poise_spec/utils'
 

@@ -20,6 +20,7 @@
 # @since 1.0.0
 module PoiseSpec
   autoload :Attributes, 'poise_spec/attributes'
+  autoload :Fauxhai, 'poise_spec/fauxhai'
 
   module ClassMethods
 
