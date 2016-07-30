@@ -15,6 +15,7 @@
 #
 
 require 'rspec'
+require 'rspec/its'
 require 'simplecov'
 
 # Check for coverage stuffs
@@ -42,6 +43,9 @@ SimpleCov.start do
 end
 
 require 'poise-spec'
+require 'chefspec' # To ensure matcher creation.
+require_relative './example_resources/poise'
+require_relative './example_resources/simple'
 
 RSpec.configure do |config|
   # Basic configuraiton

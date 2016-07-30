@@ -20,28 +20,35 @@ require 'rspec-param'
 
 module PoiseSpec
   module Fauxhai
-    def self.included(klass)
-      super
-      klass.include RSpecParam
+    module ClassMethods
+      def included(klass)
+        super
+        klass.extend ClassMethods
+        klass.include RSpecParam
 
-      klass.param(:platform, 'chefspec')
+        # Simple param for the platform ChefSpec should emulate.
+        klass.param(:platform, 'chefspec')
 
-      klass.param(:version) do
-        # In case it gets set to nil or '' somehow.
-        return '' if !platform || platform.empty?
-        # Find the path to the platform JSON files.
-        json_path = File.expand_path("lib/fauxhai/platforms/#{platform}/*.json", ::Fauxhai.root)
-        # Get a list of all versions.
-        versions = Dir[json_path].map {|path| File.basename(path, '.json') }
-        # Take the highest version available. Treat R like a separator.
-        begin
-          versions.max_by {|ver| Gem::Version.create(ver.gsub(/r/i, '.')) }
-        rescue ArgumentError
-          # Welp, do something stable.
-          versions.max
+        # Param for the version of the platform ChefSpec should emulate. If not
+        # specified uses the "highest" version of the platform.
+        klass.param(:version) do
+          # In case it gets set to nil or '' somehow.
+          return '' if !platform || platform.empty?
+          # Find the path to the platform JSON files.
+          json_path = File.expand_path("lib/fauxhai/platforms/#{platform}/*.json", ::Fauxhai.root)
+          # Get a list of all versions.
+          versions = Dir[json_path].map {|path| File.basename(path, '.json') }
+          # Take the highest version available. Treat R like a separator.
+          begin
+            versions.max_by {|ver| Gem::Version.create(ver.gsub(/r/i, '.')) }
+          rescue ArgumentError
+            # Welp, do something stable.
+            versions.max
+          end
         end
       end
-
     end
+
+    extend ClassMethods
   end
 end

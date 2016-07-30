@@ -1,5 +1,5 @@
 #
-# Copyright 2016, Noah Kantrowitz
+# Copyright 2015-2016, Noah Kantrowitz
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,24 +14,29 @@
 # limitations under the License.
 #
 
+require 'chef/resource'
+require 'chef/provider'
+require 'poise'
 
-# An RSpec helper module for writing unit tests for library-oriented Chef cookbooks.
-#
-# @since 1.0.0
-module PoiseSpec
-  autoload :Attributes, 'poise_spec/attributes'
-  autoload :ChefSpec, 'poise_spec/chefspec'
-  autoload :Fauxhai, 'poise_spec/fauxhai'
-  autoload :Patcher, 'poise_spec/patcher'
-  autoload :Runner, 'poise_spec/runner'
 
-  module ClassMethods
-    def included(klass)
-      super
-      klass.extend ClassMethods
-      klass.include PoiseSpec::ChefSpec
-    end
+# A `poise_test_poise` resource for use in PoiseSpec's unit tests.
+module PoiseTestPoise
+  class Resource < Chef::Resource
+    include Poise
+    provides(:poise_test_poise)
+    actions(:run)
   end
 
-  extend ClassMethods
+  class Provider < Chef::Provider
+    include Poise
+    provides(:poise_test_poise)
+
+    def action_run
+      notifying_block do
+        ruby_block new_resource.name do
+          block { }
+        end
+      end
+    end
+  end
 end
