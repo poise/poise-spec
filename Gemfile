@@ -30,3 +30,5 @@ end
 dev_gem 'poise'
 dev_gem 'rspec-param'
 
+# For now.
+gem 'rack', '< 2', platform: 'ruby_21'
