@@ -6,7 +6,20 @@ rvm:
 - "2.2.5"
 - "2.3.1"
 gemfile:
-- gemfiles/release.gemfile
+- gemfiles/chef-12.gemfile
+- gemfiles/chef-12.0.gemfile
+- gemfiles/chef-12.1.gemfile
+- gemfiles/chef-12.2.gemfile
+- gemfiles/chef-12.3.gemfile
+- gemfiles/chef-12.4.gemfile
+- gemfiles/chef-12.5.gemfile
+- gemfiles/chef-12.6.gemfile
+- gemfiles/chef-12.7.gemfile
+- gemfiles/chef-12.8.gemfile
+- gemfiles/chef-12.9.gemfile
+- gemfiles/chef-12.10.gemfile
+- gemfiles/chef-12.11.gemfile
+- gemfiles/chef-12.12.gemfile
 - gemfiles/master.gemfile
 before_install:
 - if [[ $BUNDLE_GEMFILE == *master.gemfile ]]; then gem update --system; fi
