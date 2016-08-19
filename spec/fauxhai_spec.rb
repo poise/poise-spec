@@ -34,7 +34,7 @@ describe PoiseSpec::Fauxhai do
 
     context 'debian' do
       platform 'debian'
-      it { is_expected.to eq ['debian', '8.4'] }
+      it { is_expected.to eq ['debian', '8.5'] }
     end
 
     context 'windows' do
