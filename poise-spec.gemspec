@@ -34,7 +34,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = %w{lib}
 
   spec.add_dependency 'chef', '~> 12.0'
-  spec.add_dependency 'chefspec', '~> 4.0'
+  spec.add_dependency 'chefspec', '~> 5.0'
   spec.add_dependency 'rspec', '~> 3.2'
   spec.add_dependency 'rspec-param'
 
